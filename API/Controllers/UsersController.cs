@@ -9,9 +9,7 @@ using System.Threading.Tasks;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class UsersController : ControllerBase
+    public class UsersController : BaseApiController
     {
         private readonly DataContext _context;
 
@@ -28,7 +26,7 @@ namespace API.Controllers
             return users;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}")] // /api/users/2
         public async Task<ActionResult<AppUser>> GetUser(int id)
         {
             return await _context.Users.FindAsync(id);
