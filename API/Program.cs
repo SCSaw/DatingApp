@@ -28,5 +28,5 @@ namespace API
             app.MapControllers();
             app.Run();
         }
-    }
+    } 
 }
