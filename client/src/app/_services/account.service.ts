@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map } from 'rxjs';
 import { User } from '../_models/user';
+import { JsonPipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root' //it is link and head to the app.module.ts file
@@ -20,6 +21,17 @@ export class AccountService {
         const user = response;
         if (user) {
           localStorage.setItem('user', JSON.stringify(user))
+          this.currentUserSource.next(user);
+        }
+      })
+    )
+  }
+
+  register(model: any){
+    return this.http.post<User>(this.baseUrl + 'account/register', model).pipe(
+      map(user => {
+        if (user){
+          localStorage.setItem('user', JSON.stringify(user));
           this.currentUserSource.next(user);
         }
       })
