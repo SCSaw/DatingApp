@@ -7,6 +7,11 @@ namespace API.Extensions
         public static string GetUsername(this ClaimsPrincipal user)
         {
             //Claim Type: Can refer back to TokenServices JwtRegisteredClaimNames
+            return user.FindFirst(ClaimTypes.Name)?.Value;
+        }
+        public static string GetUserId(this ClaimsPrincipal user)
+        {
+            //Claim Type: Can refer back to TokenServices JwtRegisteredClaimNames
             return user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         }
     }
