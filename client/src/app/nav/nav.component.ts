@@ -4,6 +4,8 @@ import { Observable, of } from 'rxjs';
 import { User } from '../_models/user';
 import { Router } from '@angular/router';
 import { Toast, ToastrService } from 'ngx-toastr';
+import { MembersService } from '../_services/members.service';
+import { Member } from '../_models/member';
 
 @Component({
   selector: 'app-nav',
@@ -12,6 +14,7 @@ import { Toast, ToastrService } from 'ngx-toastr';
 })
 export class NavComponent implements OnInit {
   model: any = {}
+  members: Member | undefined;
   // currentUser$: Observable<User | null> = of(null);
 
   constructor(public accountService: AccountService, private router: Router, 
@@ -24,6 +27,7 @@ export class NavComponent implements OnInit {
   login(){
     this.accountService.login(this.model).subscribe({
       next: () => this.router.navigateByUrl('/members'),
+      //can set userparam here to reset filter after relogin with other gender
     })
   }
 
